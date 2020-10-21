@@ -27,10 +27,22 @@ class NewsAdapter(context: Context, arrayList: ArrayList<Data>):BaseAdapter() {
 
         if(convertView == null) {
             holder = ViewHolder()
-            view = inflater.inflate()
-
+            view = inflater.inflate(R.layout.news_item,parent, false)
+            holder.sectionName = view.findViewById(R.id.section_name_text_view)
+            holder.webTitle = view.findViewById(R.id.news_title)
+            view.tag = holder
+        }
+        else{
+            view = convertView
+            holder = convertView.tag as ViewHolder
         }
 
+        val sectionNameValue = holder.sectionName
+        sectionNameValue?.text = arrayList[position].sectionName
+
+        val textValue=holder.webTitle
+        textValue?.text = arrayList[position].webTitile
+        return view
     }
 
     override fun getItem(position: Int): Any {

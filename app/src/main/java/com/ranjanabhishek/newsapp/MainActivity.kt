@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
 
     inner class MyAsyncTask: AsyncTask<String,Void,ArrayList<Data>>(){
         override fun onPostExecute(result: ArrayList<Data>?) {
-            super.onPostExecute(result)
+            if(result!=null)
+            updateUI(result)
         }
 
         override fun doInBackground(vararg params: String?): ArrayList<Data> {
@@ -53,6 +54,11 @@ class MainActivity : AppCompatActivity() {
             val data = extractFeatureFromResponse(jsonResponse)
             return data
         }
+    }
+
+    fun updateUI(list: ArrayList<Data>){
+        listView?.adapter = NewsAdapter(this, list)
+
     }
 
     fun makeHttpRequest(stringUrl:URL?):String?{
