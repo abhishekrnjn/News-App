@@ -149,4 +149,11 @@ class MainActivity : AppCompatActivity() {
         myAsyncTask.execute(stringUrl)
 
     }
+    fun loadMore(view: View){
+        pageNumber+=1
+        val stringUrl = "https://content.guardianapis.com/search?q=${edit_text.text}&tag=politics/politics&page=$pageNumber"
+        listData.clear()
+        var myAsyncTask = MyAsyncTask()
+        myAsyncTask.execute(stringUrl)
+    }
 }

@@ -1,6 +1,8 @@
 package com.ranjanabhishek.newsapp
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
@@ -40,8 +42,16 @@ class NewsAdapter(context: Context, arrayList: ArrayList<Data>):BaseAdapter() {
         val sectionNameValue = holder.sectionName
         sectionNameValue?.text = arrayList[position].sectionName
 
-        val textValue=holder.webTitle
-        textValue?.text = arrayList[position].webTitile
+        val titleValue=holder.webTitle
+        titleValue?.text = arrayList[position].webTitile
+
+        titleValue?.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(arrayList[position].webUrl))
+            context!!.startActivity(browserIntent)
+
+        }
+
+
         return view
     }
 
